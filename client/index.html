@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React App Setup</title>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  html, body, body > div, body > div > div {
+    height: 100%;
+    width: 100%;
+  }
+  #dock {
+    width: 0px; height: 0px; top: 0px; left: 0px; z-index: 99999999;
+  }
+  #dock > div {
+    position: static !important;
+  }
+  .ace_editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  </style>
+  </head>
+  <body>
+    <div id="root">
+    </div>
+  </body>
+</html>

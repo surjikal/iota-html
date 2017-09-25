@@ -1,0 +1,20 @@
+{
+  "name": "iota-html",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Nick Porter <porter.nicolas@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iota.lib.js": "^0.4.1"
+  }
+}
