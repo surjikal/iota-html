@@ -1,37 +1,13 @@
 
 import * as _ from 'lodash';
-import CURL from '../vendor/curl';
-import IOTA from '../vendor/iota';
+import IOTA from './iota-local-pow';
 
 const MAX_TRYTES = 2187;
 
 const DEFAULT_CONFIG = {
-    depth: 9
-,   minWeightMagnitude: 15
+    depth: 4
+,   minWeightMagnitude: 14
 }
-
-// let CURL = require('curl.lib.js')
-// // let IOTA = require('iota.lib.js')
-// let seed = "ANKOCZLLU9IDVH9CNMWRPCGYKTHVAXYXZXIISPKIATVKHVJHZFWUJWZAPUTPGGGXWXVOBJKCBCGXQNIXC"
-// let iota = new IOTA({host:"http://localhost", port:14500})
-// CURL.overrideAttachToTangle(iota.api);
-// CURL.init()
-// iota.api.getNewAddress(seed, {checksum:false}, (error, address) => {
-//     console.log("GOT ADDRESS!")
-//     console.log(address)
-//     if (error) throw error;
-//     let transfers = [{
-//         'address': address,
-//         'message': iota.utils.toTrytes("testing"),
-//         'value': 0,
-//         'tag': 'SURJIKAL'
-//     }]
-//     iota.api.sendTransfer(seed, 4, 14, transfers, (error, results) => {
-//         if (error) throw error;
-//         console.log("RESULTS:")
-//         console.log(results)
-//     });
-// });
 
 
 export default class IOTAClient {
@@ -41,8 +17,7 @@ export default class IOTAClient {
         this.config = _.extend({}, DEFAULT_CONFIG, config);
         this.config.seed = this.config.seed || this._generateSeed();
         console.log("SEED:", this.config.seed);
-        this.iota = new IOTA(config);
-        // CURL.overrideAttachToTangle(this.iota.api);
+        this.iota = IOTA.Create(config);
     }
 
     getMessage(bundle) {

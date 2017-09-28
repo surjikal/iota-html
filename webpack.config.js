@@ -12,7 +12,7 @@ const GenerateAssetPlugin = require('generate-asset-webpack-plugin')
 
 
 const VENDOR_ALIASES = {
-  'iota.lib.js': path.resolve(path.join(__dirname, 'node_modules/iota.lib.js/dist/iota.js'))
+  // 'iota.lib.js': path.resolve(path.join(__dirname, 'node_modules/iota.lib.js/dist/iota.js'))
 // , 'curl.lib.js': path.resolve(path.join(__dirname, 'node_modules/curl.lib.js/dist/curl.min.js'))
 }
 
@@ -49,6 +49,10 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'index_bundle.js'
   },
+
+  externals: [
+    { xmlhttprequest: '{XMLHttpRequest:XMLHttpRequest}' }
+  ],
 
   resolve: {
       extensions: ['.js', '.jsx', '.json', '*']
