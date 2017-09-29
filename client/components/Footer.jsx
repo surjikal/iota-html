@@ -11,8 +11,8 @@ const Footer = ({style}) => {
   , justifyContent: "space-between"
   , flexDirection:  "row"
   , background:     "white"
-  , zIndex:         "9"
-  , borderTop:      "1px solid #eee"
+  , zIndex:         "99999999999999"
+  , boxShadow:      "0px -20px 100px 30px white"
   }, style)
   const imageStyle = {
     flex: "0"
