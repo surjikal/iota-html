@@ -59297,7 +59297,8 @@ let HTMLEditor = Object(__WEBPACK_IMPORTED_MODULE_3_mobx_react__["a" /* observer
     body { font-family: monospace; width:'100%'; margin: 5em; }
 </style>
 <h1>Host your website on the Tangle!</h1>
-<h2>Just write some code and hit the upload button.</h2>
+<h2>Just write some HTML and hit the upload button.</h2>
+<br>
 <p>Some notes:</p>
 <p>+ The PoW uses your browser's GPU and will take a few mins to complete</p>
 <p>+ The more data you upload, the longer the PoW will take</p>`;
