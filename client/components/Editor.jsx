@@ -15,17 +15,23 @@ class EditorModel {
   @observable showPreview = true
 }
 
+const EditorHeaderInstructions = () => {
+  return (
+    <span>This website allows you to host static websites on the IOTA tangle.</span>
+  )
+}
 
-const EditorHeader = observer(({style, onSave, editorModel}) => {
+
+const EditorHeader = observer(({style, onSave, editorModel, isLoading}) => {
   style = _.extend({
-    paddingLeft: "10px"
-  , paddingRight: "10px"
-  , display: "flex"
-  , alignItems: "center"
+    paddingLeft:    "10px"
+  , paddingRight:   "10px"
+  , display:        "flex"
+  , alignItems:     "center"
   , justifyContent: "space-between"
-  , flexDirection: "row"
-  , width: "100%"
-  , borderBottom: "1px solid #f5f5f5"
+  , flexDirection:  "row"
+  , width:          "100%"
+  , borderBottom:   "1px solid #f5f5f5"
   }, style)
   const toggleEditor = () => {
     editorModel.showPreview = !editorModel.showPreview
@@ -34,12 +40,15 @@ const EditorHeader = observer(({style, onSave, editorModel}) => {
     text: editorModel.showPreview? "Show Preview" : "Hide Preview"
   , primary: editorModel.showPreview
   }
+  const saveButton = editorModel.isLoading ?
+    (<Button size='tiny' basic loading onClick={onSave}>Upload to tangle...</Button>)
+  : (<Button size='tiny' basic onClick={onSave}>Upload to tangle...</Button>)
   const previewButton = editorModel.showPreview ?
-    (<Button size='tiny' toggle basic primary onClick={toggleEditor}>Toggle Preview Panel</Button>)
-  : (<Button size='tiny' toggle basic onClick={toggleEditor}>Toggle Preview Panel</Button>)
+    (<Button size='tiny' basic primary onClick={toggleEditor}>Toggle Preview Panel</Button>)
+  : (<Button size='tiny' basic onClick={toggleEditor}>Toggle Preview Panel</Button>)
   return (
     <header style={style}>
-      <Button size='tiny' primary onClick={onSave}>Upload to tangle...</Button>
+      {saveButton}
       {previewButton}
     </header>
   )
@@ -49,7 +58,16 @@ const EditorHeader = observer(({style, onSave, editorModel}) => {
 @observer
 class HTMLEditor extends React.Component {
   @observable widths = {preview:0.5, editor:0.5}
-  @observable html = ""
+  @observable html =
+`<style>
+    body { font-family: monospace; width:'100%'; margin: 5em; }
+</style>
+<h1>Host your website on the Tangle!</h1>
+<h2>Just write some HTML and hit the upload button.</h2>
+<br>
+<p>Some notes:</p>
+<p>+ The PoW uses your browser's GPU and will take a few mins to complete</p>
+<p>+ The more data you upload, the longer the PoW will take</p>`
 
   render() {
     const self = this
@@ -65,10 +83,10 @@ class HTMLEditor extends React.Component {
       self.widths = {preview: width, editor: (1 - width)}
     }
     const onChange = (html) => {
-      console.log('html', html)
       self.html = html
       self.props.onChange(html)
     }
+    self.props.onChange(self.html)
     const editorWidthStyle = `calc(${(widths.editor * 100)}% - 30px)`
     return (
       <div style={style}>
@@ -160,7 +178,7 @@ class Editor extends React.Component {
     }
     return (
       <div style={style.container}>
-        <EditorHeader style={style.header} onSave={onSave} editorModel={editorModel} />
+        <EditorHeader style={style.header} onSave={onSave} editorModel={editorModel} showInstructions={!this.html} />
         <div style={style.editor}>
           <HTMLEditor onChange={onChange} showPreview={editorModel.showPreview} />
         </div>

@@ -1,5 +1,6 @@
 import * as _ from 'lodash'
 import React  from 'react'
+import {Icon} from 'semantic-ui-react'
 
 
 const Footer = ({style}) => {
@@ -11,8 +12,8 @@ const Footer = ({style}) => {
   , justifyContent: "space-between"
   , flexDirection:  "row"
   , background:     "white"
-  , zIndex:         "99999999999999"
-  , boxShadow:      "0px -20px 100px 30px white"
+  , zIndex:         "9"
+  , borderTop:      "1px solid #eee"
   }, style)
   const imageStyle = {
     flex: "0"
@@ -31,7 +32,11 @@ const Footer = ({style}) => {
   }
   return (
     <footer style={style}>
-      <span>bacon</span>
+      <div>
+        <a href="https://github.com/surjikal/iota-html" target="_blank">
+          <Icon color='black' link name='github' size='big' />
+        </a>
+      </div>
       <div style={imageContainerStyle}>
         <span style={{margin:"0 20px"}}>Powered by the Tangle</span>
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Iota_logo.png" style={imageStyle} />
